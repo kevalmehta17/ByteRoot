@@ -5,100 +5,100 @@
 @layer base {
   :root {
     /* Light Mode - Clean White & Emerald Green with Sage Secondary */
-    --background: 0 0% 98%; /* Very Light Gray / Almost White */
-    --foreground: 240 10% 3.9%; /* Near Black */
+    --background: 0 0% 100%; /* Very Light Gray / Almost White */
+    --foreground: 0 0% 3.9%; /* Near Black */
 
-    --muted: 210 20% 94%; /* Light Cool Gray */
-    --muted-foreground: 240 5% 35%; /* Medium-Dark Gray */
+    --muted: 0 0% 96.1%; /* Light Cool Gray */
+    --muted-foreground: 0 0% 45.1%; /* Medium-Dark Gray */
 
     --popover: 0 0% 100%; /* White for Popovers */
-    --popover-foreground: 240 10% 3.9%; /* Near Black */
+    --popover-foreground: 0 0% 3.9%; /* Near Black */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 240 10% 3.9%; /* Near Black */
+    --card-foreground: 0 0% 3.9%; /* Near Black */
 
-    --border: 210 15% 88%; /* Light Cool Gray Border */
-    --input: 210 15% 94%; /* Very Light Cool Gray Input Background */
+    --border: 0 0% 89.8%; /* Light Cool Gray Border */
+    --input: 0 0% 89.8%; /* Very Light Cool Gray Input Background */
 
-    --primary: 158 80% 38%; /* Strong Emerald Green for light mode */
-    --primary-foreground: 0 0% 100%; /* White for contrast on green */
+    --primary: 0 0% 9%; /* Strong Emerald Green for light mode */
+    --primary-foreground: 0 0% 98%; /* White for contrast on green */
 
-    --secondary: 135 29% 51%; /* Soft Muted Sage Green */
-    --secondary-foreground: 135 25% 15%; /* Dark, desaturated sage for contrast */
+    --secondary: 0 0% 96.1%; /* Soft Muted Sage Green */
+    --secondary-foreground: 0 0% 9%; /* Dark, desaturated sage for contrast */
 
-    --accent: 158 70% 50%; /* Mid-tone Emerald for accents in light mode */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 0 0% 96.1%; /* Mid-tone Emerald for accents in light mode */
+    --accent-foreground: 0 0% 9%; /* White */
 
-    --destructive: 0 84% 60%; /* Modern Red */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 84.2% 60.2%; /* Modern Red */
+    --destructive-foreground: 0 0% 98%; /* White */
 
-    --ring: 158 80% 45%; /* Emerald Green for ring */
+    --ring: 0 0% 3.9%; /* Emerald Green for ring */
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     /* Sidebar specific colors */
-    --sidebar-background: 0 0% 96%;
-    --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-primary: 158 80% 38%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 20% 90%;
-    --sidebar-accent-foreground: 158 80% 35%; /* Darker Green for hover text on light bg */
-    --sidebar-border: 210 15% 85%;
-    --sidebar-ring: 158 80% 45%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%; /* Darker Green for hover text on light bg */
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --chart-1: 158 80% 38%; /* Primary Emerald */
-    --chart-2: 135 29% 51%; /* Secondary Sage Green */
-    --chart-3: 190 30% 50%; /* Muted Teal/Blue for contrast */
-    --chart-4: 158 40% 28%; /* Darker Emerald/Teal */
-    --chart-5: 210 5% 50%; /* Neutral Gray */
+    --chart-1: 12 76% 61%; /* Primary Emerald */
+    --chart-2: 173 58% 39%; /* Secondary Sage Green */
+    --chart-3: 197 37% 24%; /* Muted Teal/Blue for contrast */
+    --chart-4: 43 74% 66%; /* Darker Emerald/Teal */
+    --chart-5: 27 87% 67%; /* Neutral Gray */
   }
 
   .dark {
     /* Dark Mode - Black Aesthetic & Emerald Green with Sage Secondary */
-    --background: 220 15% 5%; /* Very Dark, Almost Black with a hint of blue */
-    --foreground: 0 0% 92%; /* Slightly Off-White for softer contrast */
+    --background: 0 0% 3.9%; /* Very Dark, Almost Black with a hint of blue */
+    --foreground: 0 0% 98%; /* Slightly Off-White for softer contrast */
 
-    --muted: 220 15% 15%; /* Dark Gray */
-    --muted-foreground: 0 0% 60%; /* Medium Light Gray */
+    --muted: 0 0% 14.9%; /* Dark Gray */
+    --muted-foreground: 0 0% 63.9%; /* Medium Light Gray */
 
-    --popover: 220 15% 8%; /* Darker Popovers */
-    --popover-foreground: 0 0% 92%; /* Slightly Off-White */
+    --popover: 0 0% 3.9%; /* Darker Popovers */
+    --popover-foreground: 0 0% 98%; /* Slightly Off-White */
 
-    --card: 220 15% 10%; /* Dark Card, distinct from background */
-    --card-foreground: 0 0% 92%; /* Slightly Off-White */
+    --card: 0 0% 3.9%; /* Dark Card, distinct from background */
+    --card-foreground: 0 0% 98%; /* Slightly Off-White */
 
-    --border: 220 15% 18%; /* Subtle Border */
-    --input: 220 15% 15%; /* Dark Input Background */
+    --border: 0 0% 14.9%; /* Subtle Border */
+    --input: 0 0% 14.9%; /* Dark Input Background */
 
-    --primary: 158 70% 45%; /* Vibrant Emerald Green */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 0 0% 98%; /* Vibrant Emerald Green */
+    --primary-foreground: 0 0% 9%; /* White */
 
-    --secondary: 135 29% 51%; /* Soft Muted Sage Green */
-    --secondary-foreground: 135 25% 88%; /* Light, desaturated sage for contrast */
+    --secondary: 0 0% 14.9%; /* Soft Muted Sage Green */
+    --secondary-foreground: 0 0% 98%; /* Light, desaturated sage for contrast */
 
-    --accent: 158 80% 55%; /* Brighter Emerald for accent */
-    --accent-foreground: 240 10% 3.9%; /* Near Black for contrast on bright green */
+    --accent: 0 0% 14.9%; /* Brighter Emerald for accent */
+    --accent-foreground: 0 0% 98%; /* Near Black for contrast on bright green */
 
-    --destructive: 0 75% 60%; /* Brighter Red for dark mode */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 62.8% 30.6%; /* Brighter Red for dark mode */
+    --destructive-foreground: 0 0% 98%; /* White */
 
-    --ring: 158 70% 50%; /* Emerald for ring */
+    --ring: 0 0% 83.1%; /* Emerald for ring */
 
     /* Sidebar specific colors for dark mode */
-    --sidebar-background: 220 15% 4%; /* Even darker sidebar */
-    --sidebar-foreground: 0 0% 92%;
-    --sidebar-primary: 158 70% 45%;
+    --sidebar-background: 240 5.9% 10%; /* Even darker sidebar */
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 158 70% 55%; /* Brighter Green for hover text */
-    --sidebar-border: 220 15% 10%;
-    --sidebar-ring: 158 70% 50%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%; /* Brighter Green for hover text */
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --chart-1: 158 70% 45%; /* Primary Emerald (Dark) */
-    --chart-2: 135 29% 51%; /* Secondary Sage Green (Dark) */
-    --chart-3: 190 40% 55%; /* Muted Teal/Blue (Dark) */
-    --chart-4: 158 50% 30%; /* Darker Emerald/Teal (Dark) */
-    --chart-5: 210 5% 55%; /* Neutral Gray (Dark) */
+    --chart-1: 220 70% 50%; /* Primary Emerald (Dark) */
+    --chart-2: 160 60% 45%; /* Secondary Sage Green (Dark) */
+    --chart-3: 30 80% 55%; /* Muted Teal/Blue (Dark) */
+    --chart-4: 280 65% 60%; /* Darker Emerald/Teal (Dark) */
+    --chart-5: 340 75% 55%; /* Neutral Gray (Dark) */
   }
 }
 
@@ -153,4 +153,13 @@ html.dark .soft-ui-card {
 }
 html:not(.dark) .soft-ui-card {
   /* background-color: hsl(var(--card)); */ /* Use card color from vars */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

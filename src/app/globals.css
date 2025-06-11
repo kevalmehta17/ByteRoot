@@ -2,26 +2,155 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Light Mode - Clean White & Emerald Green with Sage Secondary */
+    --background: 0 0% 98%; /* Very Light Gray / Almost White */
+    --foreground: 240 10% 3.9%; /* Near Black */
+
+    --muted: 210 20% 94%; /* Light Cool Gray */
+    --muted-foreground: 240 5% 35%; /* Medium-Dark Gray */
+
+    --popover: 0 0% 100%; /* White for Popovers */
+    --popover-foreground: 240 10% 3.9%; /* Near Black */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 240 10% 3.9%; /* Near Black */
+
+    --border: 210 15% 88%; /* Light Cool Gray Border */
+    --input: 210 15% 94%; /* Very Light Cool Gray Input Background */
+
+    --primary: 158 80% 38%; /* Strong Emerald Green for light mode */
+    --primary-foreground: 0 0% 100%; /* White for contrast on green */
+
+    --secondary: 135 29% 51%; /* Soft Muted Sage Green */
+    --secondary-foreground: 135 25% 15%; /* Dark, desaturated sage for contrast */
+
+    --accent: 158 70% 50%; /* Mid-tone Emerald for accents in light mode */
+    --accent-foreground: 0 0% 100%; /* White */
+
+    --destructive: 0 84% 60%; /* Modern Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --ring: 158 80% 45%; /* Emerald Green for ring */
+
+    --radius: 0.75rem;
+
+    /* Sidebar specific colors */
+    --sidebar-background: 0 0% 96%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-primary: 158 80% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 90%;
+    --sidebar-accent-foreground: 158 80% 35%; /* Darker Green for hover text on light bg */
+    --sidebar-border: 210 15% 85%;
+    --sidebar-ring: 158 80% 45%;
+
+    --chart-1: 158 80% 38%; /* Primary Emerald */
+    --chart-2: 135 29% 51%; /* Secondary Sage Green */
+    --chart-3: 190 30% 50%; /* Muted Teal/Blue for contrast */
+    --chart-4: 158 40% 28%; /* Darker Emerald/Teal */
+    --chart-5: 210 5% 50%; /* Neutral Gray */
+  }
+
+  .dark {
+    /* Dark Mode - Black Aesthetic & Emerald Green with Sage Secondary */
+    --background: 220 15% 5%; /* Very Dark, Almost Black with a hint of blue */
+    --foreground: 0 0% 92%; /* Slightly Off-White for softer contrast */
+
+    --muted: 220 15% 15%; /* Dark Gray */
+    --muted-foreground: 0 0% 60%; /* Medium Light Gray */
+
+    --popover: 220 15% 8%; /* Darker Popovers */
+    --popover-foreground: 0 0% 92%; /* Slightly Off-White */
+
+    --card: 220 15% 10%; /* Dark Card, distinct from background */
+    --card-foreground: 0 0% 92%; /* Slightly Off-White */
+
+    --border: 220 15% 18%; /* Subtle Border */
+    --input: 220 15% 15%; /* Dark Input Background */
+
+    --primary: 158 70% 45%; /* Vibrant Emerald Green */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 135 29% 51%; /* Soft Muted Sage Green */
+    --secondary-foreground: 135 25% 88%; /* Light, desaturated sage for contrast */
+
+    --accent: 158 80% 55%; /* Brighter Emerald for accent */
+    --accent-foreground: 240 10% 3.9%; /* Near Black for contrast on bright green */
+
+    --destructive: 0 75% 60%; /* Brighter Red for dark mode */
+    --destructive-foreground: 0 0% 100%; /* White */
+
+    --ring: 158 70% 50%; /* Emerald for ring */
+
+    /* Sidebar specific colors for dark mode */
+    --sidebar-background: 220 15% 4%; /* Even darker sidebar */
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 158 70% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 158 70% 55%; /* Brighter Green for hover text */
+    --sidebar-border: 220 15% 10%;
+    --sidebar-ring: 158 70% 50%;
+
+    --chart-1: 158 70% 45%; /* Primary Emerald (Dark) */
+    --chart-2: 135 29% 51%; /* Secondary Sage Green (Dark) */
+    --chart-3: 190 40% 55%; /* Muted Teal/Blue (Dark) */
+    --chart-4: 158 50% 30%; /* Darker Emerald/Teal (Dark) */
+    --chart-5: 210 5% 55%; /* Neutral Gray (Dark) */
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    /* Font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* Larger headings - text-2xl can be applied directly in components */
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-muted/50;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/70;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
+}
+
+/* Glassmorphism base for components that need it */
+.glassmorphic {
+  @apply bg-card/60 dark:bg-card/50 backdrop-blur-lg border border-white/10 dark:border-white/5;
+}
+
+/* Soft UI / Neumorphic inspired shadows for cards (applied via card component) */
+.soft-ui-shadow-light {
+  box-shadow: 6px 6px 12px hsl(var(--background) / 0.6),
+    -6px -6px 12px hsl(0 0% 100% / 0.8);
+}
+.soft-ui-shadow-dark {
+  box-shadow: 6px 6px 12px hsl(var(--background) / 0.7),
+    -6px -6px 12px hsl(var(--foreground) / 0.05);
+}
+
+/* Ensure card itself has a background that allows shadows to appear */
+html.dark .soft-ui-card {
+  /* background-color: hsl(var(--card)); */ /* Use card color from vars */
+}
+html:not(.dark) .soft-ui-card {
+  /* background-color: hsl(var(--card)); */ /* Use card color from vars */
 }

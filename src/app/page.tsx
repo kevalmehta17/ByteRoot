@@ -224,7 +224,7 @@ export default function HomePage() {
                   alt="Medical Banner"
                   width={600}
                   height={400}
-                  className="rounded-2xl shadow-xl"
+                  className="rounded-2xl shadow-xl hover:shadow-2xl "
                 />
               </div>
 

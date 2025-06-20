@@ -6,7 +6,7 @@ import {
   MessageSquareText,
   BookText,
   Hospital,
-  CalendarDays,
+  CalendarDays, // Ensured import
   Bell,
   ShieldCheck,
   HeartPulse,
@@ -36,7 +36,7 @@ import {
   FilePlus2,
   Sun,
   Moon,
-  Tablet, // Added Tablet icon
+  Tablet,
 } from "lucide-react";
 
 export const Icons = {
@@ -62,7 +62,7 @@ export const Icons = {
     </svg>
   ),
   home: Home,
-  file: FileText, // Replaced digitalLocker with generic file
+  file: FileText,
   imageDiagnosis: Image,
   symptomChecker: MessageSquareText,
   reportSimplifier: BookText,
@@ -86,9 +86,7 @@ export const Icons = {
   analysis: Microscope,
   diagnosis: Stethoscope,
   heartPulse: HeartPulse,
-  pills: (
-    props: LucideProps // This is the existing custom pills icon
-  ) => (
+  pills: (props: LucideProps) => (
     <svg
       {...props}
       viewBox="0 0 24 24"
@@ -103,7 +101,7 @@ export const Icons = {
       <path d="M19.5 12.5h-5v5h-5v-5h-5v-5h5v-5h5v5h5z" />
     </svg>
   ),
-  tablet: Tablet, // New icon for drug interaction checker
+  tablet: Tablet,
   filePdf: (props: LucideProps) => (
     <svg
       {...props}
@@ -149,6 +147,8 @@ export const Icons = {
   bone: (props: LucideProps) => (
     <svg
       {...props}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -156,13 +156,15 @@ export const Icons = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 4c-2.6 0-4.8 2.2-4.8 4.8S9.4 16 12 16s4.8-2.2 4.8-4.8S14.6 6 12 6zm0 7.2c-1.3 0-2.4-.9-2.4-2.1s1.1-2.1 2.4-2.1 2.4.9 2.4 2.1-1.1 2.1-2.4 2.1zM7.2 18.4c.3 1 .9 1.8 1.7 2.4.8.6 1.8.9 2.9.9s2.1-.3 2.9-.9c.8-.6 1.4-1.4 1.7-2.4h-9.2zM4 20h16" />
+      <path d="M18.5 4.5a2.5 2.5 0 0 1 0 5H16v5l-2.1 2.1a2.5 2.5 0 0 1-3.5 0L8 14.5V9.5H5.5a2.5 2.5 0 0 1 0-5C8.5 4.5 10 3 12 3s3.5 1.5 3.5 1.5S18.5 4.5 18.5 4.5Z" />
+      <path d="M5.5 19.5a2.5 2.5 0 0 0 0-5H8V9.5l2.5-2.5a2.5 2.5 0 0 1 3.5 0L16 9.5V14.5h2.5a2.5 2.5 0 0 0 0-5c-3 0-4.5 1.5-4.5 1.5S8.5 19.5 5.5 19.5Z" />
     </svg>
   ),
   filePlus: FilePlus2,
   sun: Sun,
   moon: Moon,
-  shieldCheck: ShieldCheck, // Added for positive results
+  shieldCheck: ShieldCheck,
+  calendarDays: CalendarDays, // Ensured definition
 };
 
 export type IconKey = keyof typeof Icons;

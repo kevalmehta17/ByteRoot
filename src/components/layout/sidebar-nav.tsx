@@ -56,7 +56,9 @@ const navItems: NavItem[] = [
 ];
 
 export function SidebarNav() {
+  // Use usePathname from next/navigation to get the current path
   const pathname = usePathname();
+  // useSidebar is a custom hook that provides the current state of the sidebar (expanded/collapsed) and whether it's in mobile view
   const { state: sidebarState, isMobile } = useSidebar() || {
     state: "expanded",
     isMobile: false,
@@ -89,12 +91,17 @@ export function SidebarNav() {
         );
 
         const linkClasses = cn(
+          // 1. Base styles for every link
           "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200 ease-in-out", // Added group for icon hover
+          // 2. If it's an emergency item (like "SOS"), apply danger styling
           item.isEmergency
             ? "bg-destructive/10 text-destructive hover:bg-destructive/20 dark:hover:bg-destructive/30 hover:shadow-md"
-            : isActive
+            : // 3. Else if it's the currently active page, highlight it
+            isActive
             ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
-            : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-sm",
+            : // 4. Else, use default sidebar styling
+              "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-sm",
+          // 5. If item is disabled, make it dim and unclickable
           item.disabled && "cursor-not-allowed opacity-50"
         );
 

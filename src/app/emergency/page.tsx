@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { mockHospitals, type Hospital } from "@/lib/hospital-data";
 import Image from "next/image";
+import Link from "next/link";
 import { FormEvent, useEffect, useState, type ChangeEvent } from "react";
 
 interface Location {
@@ -385,6 +386,26 @@ export default function EmergencyPage() {
               )}
             </>
           )}
+          {/* Demo Version Warning */}
+          <div className="text-center mt-8">
+            <Alert className="text-center" variant="destructive">
+              <Icons.alertTriangle className="h-5 w-5 p-1" />
+              <AlertTitle className="font-bold">
+                THIS IS DEMO PROJECT
+              </AlertTitle>
+              <AlertDescription>
+                In real Emergency, please call your local emergency number (e.g,
+                108, 911) or visit the nearest hospital.
+                <br /> This is just a demo to showcase the AI capabilities.
+              </AlertDescription>
+              <Button>
+                <Link href="/">
+                  <Icons.chevronDown className="h-1 w-4 mr-2" />
+                  Back to Home
+                </Link>
+              </Button>
+            </Alert>
+          </div>
         </CardContent>
       </Card>
     </div>

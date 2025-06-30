@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -49,7 +50,7 @@ export default function EmergencyPage() {
 
   //Hospital selection state
   const [showHospitalSelection, setShowHospitalSelection] = useState(false);
-  const [hospital, setHospital] = useState<Hospital[] | null>(null);
+  const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [selectedHospitalId, setSelectedHospitalId] = useState<string | null>(
     null
   );
@@ -95,7 +96,7 @@ export default function EmergencyPage() {
         duration: 7500,
       });
     }
-    setHospital(mockHospitals);
+    setHospitals(mockHospitals);
   }, [toast]);
 
   const handleInitialSubmit = async (event: FormEvent) => {
@@ -344,9 +345,41 @@ export default function EmergencyPage() {
                         >
                           <SelectValue placeholder="Select a hospital" />
                         </SelectTrigger>
-                        <SelectContent></SelectContent>
+                        <SelectContent>
+                          {hospitals.length > 0 ? (
+                            hospitals.map((hospital) => (
+                              <SelectItem key={hospital.id} value={hospital.id}>
+                                {hospital.name} - {hospital.phone}
+                              </SelectItem>
+                            ))
+                          ) : (
+                            <SelectItem value="none" disabled>
+                              No Hospital Available
+                            </SelectItem>
+                          )}
+                        </SelectContent>
                       </Select>
+
+                      <p className="text-xs text-muted-foreground mt-1">
+                        This will send the alert message to selected hospital's
+                        queue
+                      </p>
                     </div>
+                    {/* Button to submit the Hospital */}
+                    <Button
+                      type="submit"
+                      className="w-full text-lg py-3"
+                      disabled={isSubmittingToHospital || !selectedHospitalId}
+                    >
+                      {isSubmittingToHospital ? (
+                        <>
+                          <Icons.loader className="mr-2 h-5 w-5 animate-spin" />
+                          Sending to Hospital...
+                        </>
+                      ) : (
+                        "Send Details to Selected Hospital"
+                      )}
+                    </Button>
                   </form>
                 </div>
               )}

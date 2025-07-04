@@ -1,18 +1,27 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useState, useEffect, type FormEvent, type ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Icons } from "@/components/icons";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardFooter,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
+import Image from "next/image";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  getEmergencyAssistance,
+  type EmergencyAssistanceOutput,
+} from "@/ai/flows/emergency-assistance";
 import {
   Select,
   SelectContent,
@@ -20,13 +29,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { mockHospitals, type Hospital } from "@/lib/hospital-data";
-import Image from "next/image";
-import Link from "next/link";
-import { FormEvent, useEffect, useState, type ChangeEvent } from "react";
+import { Separator } from "@/components/ui/separator";
 
 interface Location {
   latitude: number;
@@ -34,7 +38,6 @@ interface Location {
 }
 
 export default function EmergencyPage() {
-  // Form state
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
@@ -43,13 +46,11 @@ export default function EmergencyPage() {
   const [location, setLocation] = useState<Location | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
 
-  // Form submission state with AI
   const [isSubmittingInitial, setIsSubmittingInitial] = useState(false);
-  const [isAiProcessing, setIsAirProcessing] = useState(false);
+  const [isAiProcessing, setIsAiProcessing] = useState(false);
   const [aiAdvice, setAiAdvice] = useState<string | null>(null);
   const [aiError, setAiError] = useState<string | null>(null);
 
-  //Hospital selection state
   const [showHospitalSelection, setShowHospitalSelection] = useState(false);
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
   const [selectedHospitalId, setSelectedHospitalId] = useState<string | null>(
@@ -63,9 +64,8 @@ export default function EmergencyPage() {
 
   useEffect(() => {
     setMounted(true);
-    // Get user's location
+
     if (navigator.geolocation) {
-      // Check if geolocation is supported
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLocation({
@@ -75,43 +75,45 @@ export default function EmergencyPage() {
           setLocationError(null);
         },
         (error) => {
-          console.error("Error getting Location:", error);
-          const message = `Error getting location: ${error.message}. Please ensure that location services are enabled.`;
+          console.warn("Geolocation error:", error); // Changed to warn to be less alarming
+          let message = "Could not retrieve your location.";
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              message =
+                "You have denied location access. Please enable it in your browser settings to use this feature.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              message = "Your location information is currently unavailable.";
+              break;
+            case error.TIMEOUT:
+              message = "The request to get your location timed out.";
+              break;
+          }
           setLocationError(message);
           toast({
-            title: "Location Error",
+            title: "Location Access Issue",
             description: message,
             variant: "destructive",
-            duration: 7500,
+            duration: 7000,
           });
         }
       );
     } else {
-      const message =
-        "Geolocation is not supported in your browser. Please enable location services or use a different browser.";
+      const message = "Geolocation is not supported by this browser.";
       setLocationError(message);
       toast({
         title: "Location Error",
         description: message,
         variant: "destructive",
-        duration: 7500,
       });
     }
     setHospitals(mockHospitals);
   }, [toast]);
 
-  const handleInitialSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    setIsSubmittingInitial(true);
-    setAiAdvice(null);
-    setAiError(null);
-  };
-
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0] || null;
+    const file = event.target.files?.[0];
     if (file) {
       setImageFile(file);
-      // now we have to render the image in the form
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -123,7 +125,108 @@ export default function EmergencyPage() {
     }
   };
 
-  const handleHospitalSubmit = () => {};
+  const handleInitialSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    setIsSubmittingInitial(true);
+    setAiAdvice(null);
+    setAiError(null);
+
+    toast({
+      title: "Emergency Details Recorded",
+      description: "Getting preliminary AI advice. Please wait...",
+    });
+
+    setIsAiProcessing(true);
+    try {
+      const inputForAI: {
+        emergencyDescription?: string;
+        imageDataUri?: string;
+      } = {};
+      if (description.trim()) {
+        inputForAI.emergencyDescription = description;
+      }
+      if (imagePreview) {
+        inputForAI.imageDataUri = imagePreview;
+      }
+
+      if (inputForAI.emergencyDescription || inputForAI.imageDataUri) {
+        const result: EmergencyAssistanceOutput = await getEmergencyAssistance(
+          inputForAI
+        );
+        setAiAdvice(result.preliminaryAdvice);
+      } else {
+        setAiAdvice(
+          "No specific details provided for AI analysis. Focus on safety and await professional help."
+        );
+      }
+    } catch (err) {
+      console.error("AI assistance error:", err);
+      const errorMsg =
+        err instanceof Error ? err.message : "Could not get AI advice.";
+      setAiError(`Failed to get AI advice: ${errorMsg}`);
+      toast({
+        title: "AI Assistance Failed",
+        description: errorMsg,
+        variant: "destructive",
+      });
+    } finally {
+      setIsAiProcessing(false);
+      setIsSubmittingInitial(false);
+      setShowHospitalSelection(true);
+    }
+  };
+
+  const handleHospitalSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!selectedHospitalId) {
+      toast({
+        title: "No Hospital Selected",
+        description: "Please select a hospital to send details to.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsSubmittingToHospital(true);
+
+    const selectedHospital = hospitals.find((h) => h.id === selectedHospitalId);
+
+    // --- Start of Simulation Logic ---
+    try {
+      const newAlert = {
+        id: crypto.randomUUID(), // Modern way to get a unique ID
+        name: name,
+        phone: phone,
+        description: description,
+        hospitalName: selectedHospital?.name || "Unknown Hospital",
+        timestamp: new Date().toISOString(),
+      };
+
+      const existingAlerts = JSON.parse(
+        localStorage.getItem("emergencyAlerts") || "[]"
+      );
+      const updatedAlerts = [...existingAlerts, newAlert];
+      localStorage.setItem("emergencyAlerts", JSON.stringify(updatedAlerts));
+
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
+
+      toast({
+        title: "Alert Sent (DEMO)",
+        description: `Your emergency alert has been sent to ${selectedHospital?.name}. You can view active alerts in the "Hospital Panel" section.`,
+        variant: "default",
+        duration: 8000,
+      });
+    } catch (error) {
+      console.error("Failed to save alert to localStorage", error);
+      toast({
+        title: "Submission Failed",
+        description: "Could not save the alert locally. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmittingToHospital(false);
+    }
+    // --- End of Simulation Logic ---
+  };
 
   const isFormValid = name && phone && description;
 
@@ -131,7 +234,7 @@ export default function EmergencyPage() {
     <div className="min-h-screen bg-gradient-to-br from-destructive/20 via-background to-destructive/20 flex flex-col items-center justify-center p-4 selection:bg-primary selection:text-primary-foreground">
       <Card className="w-full max-w-2xl shadow-2xl border-destructive/50">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 flex items-center justify-center w-16 h-16 rounded-full bg-destructive/10">
+          <div className="mx-auto mb-4 flex items-center justify-center h-16 w-16 rounded-full bg-destructive/10">
             <Icons.emergency className="h-10 w-10 text-destructive animate-pulse" />
           </div>
           <CardTitle className="font-headline text-3xl text-destructive drop-shadow-sm">
@@ -151,14 +254,13 @@ export default function EmergencyPage() {
         <CardContent>
           {!mounted ? (
             <div className="flex flex-col items-center justify-center space-y-2 py-10">
-              <Icons.loader className="h-10 w-10 animate-spin text primary" />
-              <p className="text-muted-foreground">Loading Emergency Form...</p>
+              <Icons.loader className="h-10 w-10 animate-spin text-primary" />
+              <p className="text-muted-foreground">Loading emergency form...</p>
             </div>
           ) : (
             <>
               {!showHospitalSelection ? (
                 <form onSubmit={handleInitialSubmit} className="space-y-6">
-                  {/* Name */}
                   <div>
                     <Label
                       htmlFor="name"
@@ -171,12 +273,11 @@ export default function EmergencyPage() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="e.g., Peter Parker"
+                      placeholder="e.g., Jane Doe"
                       required
                       className="mt-1"
                     />
                   </div>
-                  {/* Phone Number */}
                   <div>
                     <Label
                       htmlFor="phone"
@@ -189,18 +290,17 @@ export default function EmergencyPage() {
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g, 91571133"
+                      placeholder="e.g., (555) 123-4567"
                       required
                       className="mt-1"
                     />
                   </div>
-                  {/* Description */}
                   <div>
                     <Label
                       htmlFor="description"
-                      className="font-semibold text-foreground "
+                      className="font-semibold text-foreground"
                     >
-                      Description
+                      Brief Description of Emergency
                     </Label>
                     <Textarea
                       id="description"
@@ -209,15 +309,15 @@ export default function EmergencyPage() {
                       placeholder="e.g., Severe chest pain, fell and can't get up..."
                       required
                       className="mt-1"
+                      rows={4}
                     />
                   </div>
-                  {/* Image handling */}
                   <div>
                     <Label
                       htmlFor="image"
                       className="font-semibold text-foreground"
                     >
-                      Upload image For more accurate response(optional){" "}
+                      Upload Image (Optional)
                     </Label>
                     <Input
                       id="image"
@@ -230,7 +330,7 @@ export default function EmergencyPage() {
                       <div className="mt-3 p-2 border border-dashed rounded-md inline-block">
                         <Image
                           src={imagePreview}
-                          alt="image Preview"
+                          alt="Image preview"
                           width={150}
                           height={150}
                           className="rounded-md object-contain max-h-[150px]"
@@ -242,20 +342,20 @@ export default function EmergencyPage() {
                       </div>
                     )}
                   </div>
-                  {/* Location */}
+
                   {location && (
                     <Alert
                       variant="default"
                       className="bg-green-50 border-green-300"
                     >
                       <Icons.mapPin className="h-5 w-5 text-green-700" />
-                      <AlertTitle className="text-green-800 font-bold">
+                      <AlertTitle className="text-green-800">
                         Location Detected
                       </AlertTitle>
-                      <AlertDescription className="text-green-700 font-semibold">
-                        Latitude: {location.latitude.toFixed(5)}, Longitude:
-                        {location.longitude.toFixed(5)}. This will help us find
-                        you quickly.
+                      <AlertDescription className="text-green-700">
+                        Latitude: {location.latitude.toFixed(5)}, Longitude:{" "}
+                        {location.longitude.toFixed(5)}. This will be used if
+                        you send details to a hospital.
                       </AlertDescription>
                     </Alert>
                   )}
@@ -268,6 +368,7 @@ export default function EmergencyPage() {
                       </AlertDescription>
                     </Alert>
                   )}
+
                   <Button
                     type="submit"
                     className="w-full text-lg py-3 bg-destructive hover:bg-destructive/90 text-destructive-foreground shadow-md"
@@ -275,38 +376,36 @@ export default function EmergencyPage() {
                       isSubmittingInitial || isAiProcessing || !isFormValid
                     }
                   >
-                    {isSubmittingInitial && isAiProcessing ? (
+                    {isSubmittingInitial || isAiProcessing ? (
                       <>
-                        <Icons.loader className="mr-2 h-5 w-5 animate-spin" />
+                        <Icons.loader className="mr-2 h-5 w-5 animate-spin" />{" "}
                         Processing...
                       </>
                     ) : (
                       <>
-                        <Icons.send className="mr-2 h-5 w-5 p-1" />
-                        Submit & Get Preliminary AI Advice
+                        <Icons.send className="mr-2 h-5 w-5" /> Submit & Get
+                        Preliminary Advice
                       </>
                     )}
                   </Button>
                 </form>
               ) : (
-                // AI Advice part
                 <div className="space-y-6">
-                  {/* If AI is processing then we have to render loading state */}
                   {isAiProcessing && (
                     <div className="flex flex-col items-center justify-center space-y-2 py-4">
-                      <Icons.loader className="h-10 w-10 animate-spin text-primary" />
+                      <Icons.loader className="h-8 w-8 animate-spin text-primary" />
                       <p className="text-muted-foreground">
                         Getting AI preliminary advice...
                       </p>
                     </div>
                   )}
-                  {/* We have to render the AI Advice as Card */}
+
                   {aiAdvice && !isAiProcessing && (
                     <Card className="bg-primary/5 border-primary/30">
                       <CardHeader>
                         <CardTitle className="text-lg font-headline flex items-center gap-2">
-                          <Icons.diagnosis className="h-6 w-6 text-primary" />
-                          AI Preliminary Advice(Beta)
+                          <Icons.diagnosis className="text-primary h-5 w-5" />{" "}
+                          AI Preliminary Advice (DEMO)
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -317,56 +416,58 @@ export default function EmergencyPage() {
                       <CardFooter>
                         <p className="text-xs text-destructive font-semibold">
                           Always prioritize instructions from emergency
-                          responders (e.g. 108 Number) over this AI advice.
+                          responders (e.g., 911 operators) over this AI advice.
                         </p>
                       </CardFooter>
                     </Card>
                   )}
-                  {/* Check for the AI Error */}
                   {aiError && !isAiProcessing && (
                     <Alert variant="destructive">
                       <Icons.alertTriangle className="h-4 w-4" />
-                      <AlertTitle>AI Assistant Error</AlertTitle>
+                      <AlertTitle>AI Assistance Error</AlertTitle>
                       <AlertDescription>{aiError}</AlertDescription>
                     </Alert>
                   )}
+
                   <Separator className="my-6" />
 
-                  {/* Hospital Selection */}
                   <form onSubmit={handleHospitalSubmit} className="space-y-4">
                     <div>
-                      <Label>Select Hospital to Notify (Optional)</Label>
+                      <Label
+                        htmlFor="hospital-select"
+                        className="font-semibold text-foreground text-lg"
+                      >
+                        Select Hospital to Notify (Optional)
+                      </Label>
                       <Select
                         value={selectedHospitalId || ""}
                         onValueChange={setSelectedHospitalId}
                       >
                         <SelectTrigger
-                          className="w-full mt-1"
                           id="hospital-select"
+                          className="w-full mt-1"
                         >
-                          <SelectValue placeholder="Select a hospital" />
+                          <SelectValue placeholder="Choose a hospital..." />
                         </SelectTrigger>
                         <SelectContent>
                           {hospitals.length > 0 ? (
                             hospitals.map((hospital) => (
                               <SelectItem key={hospital.id} value={hospital.id}>
-                                {hospital.name} - {hospital.phone}
+                                {hospital.name} - {hospital.city}
                               </SelectItem>
                             ))
                           ) : (
                             <SelectItem value="none" disabled>
-                              No Hospital Available
+                              No h ospitals available
                             </SelectItem>
                           )}
                         </SelectContent>
                       </Select>
-
                       <p className="text-xs text-muted-foreground mt-1">
-                        This will send the alert message to selected hospital's
-                        queue
+                        This will send a simulated alert to the selected
+                        hospital's queue.
                       </p>
                     </div>
-                    {/* Button to submit the Hospital */}
                     <Button
                       type="submit"
                       className="w-full text-lg py-3"
@@ -374,7 +475,7 @@ export default function EmergencyPage() {
                     >
                       {isSubmittingToHospital ? (
                         <>
-                          <Icons.loader className="mr-2 h-5 w-5 animate-spin" />
+                          <Icons.loader className="mr-2 h-5 w-5 animate-spin" />{" "}
                           Sending to Hospital...
                         </>
                       ) : (
@@ -386,25 +487,28 @@ export default function EmergencyPage() {
               )}
             </>
           )}
-          {/* Demo Version Warning */}
-          <div className="text-center mt-8">
-            <Alert className="text-center" variant="destructive">
-              <Icons.alertTriangle className="h-5 w-5 p-1" />
+
+          <div className="mt-8 text-center">
+            <Alert variant="destructive" className="text-center">
+              <Icons.alertTriangle className="h-5 w-5" />
               <AlertTitle className="font-bold">
-                THIS IS DEMO PROJECT
+                THIS IS A DEMO APPLICATION
               </AlertTitle>
               <AlertDescription>
-                In real Emergency, please call your local emergency number (e.g,
-                108, 911) or visit the nearest hospital.
-                <br /> This is just a demo to showcase the AI capabilities.
+                In a real emergency, please call your local emergency number
+                (e.g., 911, 112) immediately. Do NOT rely on this form for
+                actual emergency assistance.
               </AlertDescription>
-              <Button>
-                <Link href="/">
-                  <Icons.chevronDown className="h-1 w-4 mr-2" />
-                  Back to Home
-                </Link>
-              </Button>
             </Alert>
+            <Button
+              variant="link"
+              asChild
+              className="mt-4 text-muted-foreground"
+            >
+              <Link href="/dashboard">
+                <Icons.chevronLeft className="mr-1 h-4 w-4" /> Back to Home
+              </Link>
+            </Button>
           </div>
         </CardContent>
       </Card>

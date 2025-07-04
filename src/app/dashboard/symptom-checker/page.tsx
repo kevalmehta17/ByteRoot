@@ -11,7 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-// import { getSymptomBasedAdvice, type SymptomBasedAdviceOutput } from '@/ai/flows/symptom-based-advice'; // GenAI flow
+import {
+  getSymptomBasedAdvice,
+  type SymptomBasedAdviceOutput,
+} from "@/ai/flows/symptom-based-advice"; // GenAI flow
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,8 +24,8 @@ import { useState, type FormEvent } from "react";
 export default function SymptomCheckerPage() {
   const [symptoms, setSymptoms] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  //   const [adviceResult, setAdviceResult] =
-  //     useState<SymptomBasedAdviceOutput | null>(null);
+  const [adviceResult, setAdviceResult] =
+    useState<SymptomBasedAdviceOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -38,20 +41,25 @@ export default function SymptomCheckerPage() {
     }
 
     setIsLoading(true);
-    // setAdviceResult(null);
-    // setError(null);
+    setAdviceResult(null);
+    setError(null);
 
-    // try {
-    //   const result = await getSymptomBasedAdvice({ symptoms });
-    //   setAdviceResult(result);
-    // } catch (err) {
-    //   console.error('Error in symptom-based advice:', err);
-    //   const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred.';
-    //   setError(errorMessage);
-    //   toast({ title: 'Failed to Get Advice', description: errorMessage, variant: 'destructive' });
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const result = await getSymptomBasedAdvice({ symptoms });
+      setAdviceResult(result);
+    } catch (err) {
+      console.error("Error in symptom-based advice:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(errorMessage);
+      toast({
+        title: "Failed to Get Advice",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className="space-y-8">
@@ -119,7 +127,7 @@ export default function SymptomCheckerPage() {
         </Alert>
       )}
 
-      {/* {adviceResult && (
+      {adviceResult && (
         <Card className="shadow-lg max-w-2xl mx-auto mt-8">
           <CardHeader>
             <CardTitle className="text-xl font-headline flex items-center gap-2">
@@ -155,7 +163,7 @@ export default function SymptomCheckerPage() {
             </p>
           </CardFooter>
         </Card>
-      )} */}
+      )}
     </div>
   );
 }

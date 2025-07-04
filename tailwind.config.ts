@@ -113,6 +113,10 @@ export default {
 						boxShadow: '0 0 0 15px hsl(var(--primary) / 0)'
 					}
 				},
+				slideUp: {
+					'0%': { transform: 'translateY(20px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' },
+				},
 				'subtle-slide-up': {
 					'0%': {
 						opacity: '0',
@@ -138,8 +142,9 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'pulse-strong': 'pulse-strong 2s infinite',
-				'subtle-slide-up': 'subtle-slide-up 0.5s ease-out forwards',
-				'pulse-badge': 'pulse-badge 1.5s infinite ease-in-out'
+				// 'subtle-slide-up': 'subtle-slide-up 0.5s ease-out forwards',
+				'pulse-badge': 'pulse-badge 1.5s infinite ease-in-out',
+				'subtle-slide-up': 'slideUp 0.5s ease-out',
 			}
 		}
 	},

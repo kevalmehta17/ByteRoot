@@ -66,8 +66,8 @@ export function AppointmentForm({ hospital }: AppointmentFormProps) {
     }
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // // Simulate API call
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
 
     console.log({
       hospitalId: hospital.id,
@@ -156,7 +156,7 @@ export function AppointmentForm({ hospital }: AppointmentFormProps) {
                 onSelect={setAppointmentDate}
                 initialFocus
                 disabled={(date) =>
-                  date < new Date(new Date().setDate(new Date().getDate() - 1))
+                  date < new Date(new Date().setHours(0, 0, 0, 0))
                 } // Disable past dates
               />
             </PopoverContent>

@@ -37,6 +37,7 @@ import {
   Sun,
   Moon,
   Tablet,
+  MessageCircle,
 } from "lucide-react";
 
 export const Icons = {
@@ -102,6 +103,7 @@ export const Icons = {
     </svg>
   ),
   tablet: Tablet,
+  chatbot: MessageCircle,
   filePdf: (props: LucideProps) => (
     <svg
       {...props}

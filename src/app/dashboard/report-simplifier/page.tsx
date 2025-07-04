@@ -1,8 +1,8 @@
 "use client";
 
-import { Icons } from "@/components/icons";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -11,6 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Icons } from "@/components/icons";
+import { useToast } from "@/hooks/use-toast";
+import {
+  simplifyReport,
+  type SimplifyReportOutput,
+} from "@/ai/flows/report-simplifier"; // GenAI flow
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -19,16 +26,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import React, { useState, type FormEvent } from "react";
+import { Separator } from "@/components/ui/separator";
 
 const supportedLanguages = [
   { value: "English", label: "English" },
-  { value: "Hindi", label: "हिन्दी (Hindi)" },
   { value: "Spanish", label: "Español (Spanish)" },
   { value: "French", label: "Français (French)" },
   { value: "German", label: "Deutsch (German)" },
+  { value: "Hindi", label: "हिन्दी (Hindi)" },
   { value: "Chinese", label: "中文 (Chinese)" },
 ];
 
@@ -36,7 +41,8 @@ export default function ReportSimplifierPage() {
   const [reportText, setReportText] = useState("");
   const [targetLanguage, setTargetLanguage] = useState("English");
   const [isLoading, setIsLoading] = useState(false);
-  // const [simplifiedReport, setSimplifiedReport] = useState<SimplifyReportOutput | null>(null);
+  const [simplifiedReport, setSimplifiedReport] =
+    useState<SimplifyReportOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -52,43 +58,45 @@ export default function ReportSimplifierPage() {
     }
 
     setIsLoading(true);
-    // setSimplifiedReport(null);
-    // setError(null);
+    setSimplifiedReport(null);
+    setError(null);
 
-    // try {
-    //   const result = await simplifyReport({
-    //     reportText,
-    //     language: targetLanguage,
-    //   });
-    //   setSimplifiedReport(result);
-    // } catch (err) {
-    //   console.error("Error in report simplification:", err);
-    //   const errorMessage =
-    //     err instanceof Error ? err.message : "An unknown error occurred.";
-    //   setError(errorMessage);
-    //   toast({
-    //     title: "Failed to Simplify Report",
-    //     description: errorMessage,
-    //     variant: "destructive",
-    //   });
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const result = await simplifyReport({
+        reportText,
+        language: targetLanguage,
+      });
+      setSimplifiedReport(result);
+    } catch (err) {
+      console.error("Error in report simplification:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(errorMessage);
+      toast({
+        title: "Failed to Simplify Report",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div className="space-y-8">
-      <h1 className="font-headline font-semibold text-3xl text-foreground drop-shadow-sm">
+      <h1 className="font-headline text-3xl font-semibold text-foreground drop-shadow-sm">
         Report Simplifier & Translator (AI Beta)
       </h1>
+
       <Card className="shadow-lg max-w-3xl mx-auto">
         <CardHeader>
           <CardTitle className="text-xl font-headline flex items-center gap-2">
-            Understand your Medical Report
+            <Icons.reportSimplifier className="h-6 w-6 text-primary" />{" "}
+            Understand Your Medical Report
           </CardTitle>
           <CardDescription>
             Paste your complex medical report below. Our AI will simplify it and
-            translate it into your preferred language. This tool is for
+            translate it into your chosen language. This tool is for
             informational purposes and not a substitute for professional medical
             advice.
           </CardDescription>
@@ -98,23 +106,23 @@ export default function ReportSimplifierPage() {
             <div>
               <Label
                 htmlFor="report-text-input"
-                className="block text-sm font-medium text-foreground mb-2"
+                className="block text-sm font-medium text-foreground mb-1"
               >
-                Medical Report text
+                Medical Report Text
               </Label>
               <Textarea
                 id="report-text-input"
                 value={reportText}
                 onChange={(e) => setReportText(e.target.value)}
-                placeholder="Paste your medical report text here..."
+                placeholder="Paste your medical report here..."
                 rows={10}
                 className="min-h-[200px]"
-              ></Textarea>
+              />
             </div>
             <div>
               <Label
                 htmlFor="target-language"
-                className="text-sm block font-medium text-foreground mb-1"
+                className="block text-sm font-medium text-foreground mb-1"
               >
                 Target Language for Summary
               </Label>
@@ -123,12 +131,12 @@ export default function ReportSimplifierPage() {
                   id="target-language"
                   className="w-full md:w-[280px]"
                 >
-                  <SelectValue placeholder="Select Language"></SelectValue>
+                  <SelectValue placeholder="Select language" />
                 </SelectTrigger>
                 <SelectContent>
                   {supportedLanguages.map((lang) => (
                     <SelectItem key={lang.value} value={lang.value}>
-                      {lang.value}
+                      {lang.label}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -143,13 +151,13 @@ export default function ReportSimplifierPage() {
             >
               {isLoading ? (
                 <>
-                  <Icons.loader className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.loader className="mr-2 h-4 w-4 animate-spin" />{" "}
                   Simplifying...
                 </>
               ) : (
                 <>
-                  <Icons.search className="mr-2 h-4 w-4" />
-                  Simplify & Translate Report
+                  <Icons.search className="mr-2 h-4 w-4" /> Simplify & Translate
+                  Report
                 </>
               )}
             </Button>
@@ -165,7 +173,7 @@ export default function ReportSimplifierPage() {
         </Alert>
       )}
 
-      {/* {simplifiedReport && (
+      {simplifiedReport && (
         <Card className="shadow-lg max-w-3xl mx-auto mt-8">
           <CardHeader>
             <CardTitle className="text-xl font-headline flex items-center gap-2">
@@ -215,7 +223,7 @@ export default function ReportSimplifierPage() {
             </p>
           </CardFooter>
         </Card>
-      )} */}
+      )}
     </div>
   );
 }

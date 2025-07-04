@@ -118,7 +118,7 @@ export default function HomePage() {
           <Link href={"/"} className="flex items-center gap-2 group">
             <Icons.logo className="h-8 w-8 text-primary transition-transform duration-300 group-hover:rotate-[360deg] group-hover:scale-110" />
             <span className="font-headline text-2xl font-semibold text-primary">
-              ByteRoot
+              MediPocket
             </span>
           </Link>
           <nav className="space-x-2 md:space-x-4">
@@ -174,7 +174,7 @@ export default function HomePage() {
               variants={fadeInUp}
               custom={1}
             >
-              ByteRoot provides AI-powered health insights, drug interaction
+              MediPocket provides AI-powered health insights, drug interaction
               checks, and easy hospital access, all in one place.
             </motion.p>
             <motion.div
@@ -302,6 +302,7 @@ export default function HomePage() {
                   width={600}
                   height={400}
                   className="rounded-2xl shadow-xl hover:shadow-2xl"
+                  data-ai-hint="medical stethoscope"
                 />
               </motion.div>
               <motion.div variants={fadeInUp} className="md:w-1/2">

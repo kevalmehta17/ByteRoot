@@ -14,7 +14,10 @@ import {
 } from "@/components/ui/card";
 import { Icons } from "@/components/icons";
 import { useToast } from "@/hooks/use-toast";
-// import { imageBasedDiagnosis, type ImageBasedDiagnosisOutput } from '@/ai/flows/image-based-diagnosis'; // GenAI flow
+import {
+  imageBasedDiagnosis,
+  type ImageBasedDiagnosisOutput,
+} from "@/ai/flows/image-based-diagnosis"; // GenAI flow
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
@@ -23,7 +26,8 @@ export default function ImageDiagnosisPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // This will hold the data URI for image or PDF
   const [isLoading, setIsLoading] = useState(false);
-  //   const [diagnosisResult, setDiagnosisResult] = useState<ImageBasedDiagnosisOutput | null>(null);
+  const [diagnosisResult, setDiagnosisResult] =
+    useState<ImageBasedDiagnosisOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -31,7 +35,7 @@ export default function ImageDiagnosisPage() {
     const file = event.target.files?.[0];
     if (file) {
       setImageFile(file);
-      //   setDiagnosisResult(null);
+      setDiagnosisResult(null);
       setError(null);
       // Uses FileReader to convert file into base64 preview (data URI).
       const reader = new FileReader();
@@ -57,25 +61,25 @@ export default function ImageDiagnosisPage() {
     }
 
     setIsLoading(true);
-    // setDiagnosisResult(null);
+    setDiagnosisResult(null);
     setError(null);
 
-    // try {
-    //   const result = await imageBasedDiagnosis({ fileDataUri: imagePreview });
-    //   setDiagnosisResult(result);
-    // } catch (err) {
-    //   console.error("Error in file diagnosis:", err);
-    //   const errorMessage =
-    //     err instanceof Error ? err.message : "An unknown error occurred.";
-    //   setError(errorMessage);
-    //   toast({
-    //     title: "Analysis Failed",
-    //     description: errorMessage,
-    //     variant: "destructive",
-    //   });
-    // } finally {
-    //   setIsLoading(false);
-    // }
+    try {
+      const result = await imageBasedDiagnosis({ fileDataUri: imagePreview });
+      setDiagnosisResult(result);
+    } catch (err) {
+      console.error("Error in file diagnosis:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(errorMessage);
+      toast({
+        title: "Analysis Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -177,7 +181,7 @@ export default function ImageDiagnosisPage() {
         </Alert>
       )}
 
-      {/* {diagnosisResult && (
+      {diagnosisResult && (
         <Card className="shadow-lg max-w-2xl mx-auto mt-8">
           <CardHeader>
             <CardTitle className="text-xl font-headline flex items-center gap-2">
@@ -213,7 +217,7 @@ export default function ImageDiagnosisPage() {
             </p>
           </CardFooter>
         </Card>
-      )} */}
+      )}
     </div>
   );
 }

@@ -8,8 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useToast } from "@/hooks/use-toast";
+import {
+  checkDrugInteractions,
+  type DrugInteractionOutput,
+} from "@/ai/flows/drug-interaction-checker";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -23,8 +27,8 @@ export default function DrugInteractionChecker() {
     Array(MAX_DRUGS).fill("")
   );
   const [isLoading, setIsLoading] = useState(false);
-  //   const [interactionResult, setInteractionResult] =
-  //     useState<DrugInteractionOutput | null>(null);
+  const [interactionResult, setInteractionResult] =
+    useState<DrugInteractionOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
@@ -35,7 +39,44 @@ export default function DrugInteractionChecker() {
     setMedicines(newMedicines);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const filledMedicines = medicines
+      .map((m) => m.trim())
+      .filter((m) => m !== "");
+
+    if (filledMedicines.length < 2) {
+      toast({
+        title: "Insufficient Input",
+        description: "Please enter at least two medicine names.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    // setInteractionResult(null);
+    setError(null);
+
+    try {
+      const result = await checkDrugInteractions({
+        medicines: filledMedicines,
+      });
+      setInteractionResult(result);
+    } catch (err) {
+      console.error("Error in drug interaction check:", err);
+      const errorMessage =
+        err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(errorMessage);
+      toast({
+        title: "Analysis Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -111,7 +152,7 @@ export default function DrugInteractionChecker() {
       )}
 
       {/* This will show the interaction result if available */}
-      {/* {interactionResult && (
+      {interactionResult && (
         <Card
           className={`shadow-lg max-w-2xl mx-auto mt-8 ${
             interactionResult.isRisky
@@ -161,7 +202,7 @@ export default function DrugInteractionChecker() {
             </p>
           </CardFooter>
         </Card>
-      )} */}
+      )}
     </div>
   );
 }

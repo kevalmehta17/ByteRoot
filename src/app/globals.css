@@ -116,7 +116,7 @@
   /* Larger headings - text-2xl can be applied directly in components */
 }
 
-/* Custom scrollbar styling */
+/* Enhanced Custom scrollbar styling with gradients */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -126,16 +126,145 @@
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/70;
+  background: linear-gradient(135deg, #10b981, #14b8a6);
   border-radius: 10px;
+  transition: all 0.3s ease;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+  background: linear-gradient(135deg, #059669, #0f766e);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 /* Glassmorphism base for components that need it */
 .glassmorphic {
   @apply bg-card/60 dark:bg-card/50 backdrop-blur-lg border border-white/10 dark:border-white/5;
+}
+
+/* Enhanced Gradient Animations */
+@keyframes gradient-x {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+  }
+}
+
+@keyframes gradient-y {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-50%) scale(1.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+/* Modern Green Gradient Classes */
+.gradient-emerald {
+  background: linear-gradient(135deg, #10b981, #14b8a6, #06b6d4);
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease infinite;
+}
+
+.gradient-emerald-subtle {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(20, 184, 166, 0.1), rgba(6, 182, 212, 0.1));
+  background-size: 200% 200%;
+  animation: gradient-x 6s ease infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-green {
+  animation: pulse-green 2s infinite;
+}
+
+/* Enhanced Card Hover Effects */
+.modern-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 25px 50px -12px rgba(16, 185, 129, 0.25),
+    0 0 0 1px rgba(16, 185, 129, 0.1);
+}
+
+/* Enhanced Button Styles */
+.btn-gradient-emerald {
+  background: linear-gradient(135deg, #10b981, #14b8a6);
+  background-size: 200% 200%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient-emerald:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-gradient-emerald::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn-gradient-emerald:hover::before {
+  left: 100%;
 }
 
 /* Soft UI / Neumorphic inspired shadows for cards (applied via card component) */
@@ -146,6 +275,45 @@
 .soft-ui-shadow-dark {
   box-shadow: 6px 6px 12px hsl(var(--background) / 0.7),
     -6px -6px 12px hsl(var(--foreground) / 0.05);
+}
+
+/* Text Gradient Effects */
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #10b981, #14b8a6, #059669);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-x 4s ease infinite;
+}
+
+
+
+/* Loading Animation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Enhanced Focus States */
+.focus-emerald:focus-visible {
+  outline: 2px solid #10b981;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+/* Modern Backdrop Blur */
+.backdrop-blur-modern {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
 }
 
 /* Ensure card itself has a background that allows shadows to appear */

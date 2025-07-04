@@ -4,102 +4,125 @@
 
 @layer base {
   :root {
-    /* Light Mode - Clean White & Adjusted Emerald Green with Sage Secondary */
-    --background: 0 0% 98%; /* Very Light Gray / Almost White */
-    --foreground: 240 10% 3.9%; /* Near Black */
+    /* Enhanced Light Mode - More vibrant and gradient-friendly */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
 
-    --muted: 210 20% 94%; /* Light Cool Gray */
-    --muted-foreground: 240 5% 35%; /* Medium-Dark Gray */
+    --muted: 210 20% 94%;
+    --muted-foreground: 240 5% 35%;
 
-    --popover: 0 0% 100%; /* White for Popovers */
-    --popover-foreground: 240 10% 3.9%; /* Near Black */
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --card: 0 0% 100%; /* White */
-    --card-foreground: 240 10% 3.9%; /* Near Black */
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
 
-    --border: 210 15% 88%; /* Light Cool Gray Border */
-    --input: 210 15% 94%; /* Very Light Cool Gray Input Background */
+    --border: 210 15% 88%;
+    --input: 210 15% 94%;
 
-    /* Adjusted Light Mode Greens for better vibrancy and appeal */
-    --primary: 158 75% 42%; /* Slightly brighter and more vibrant Emerald Green for light mode */
-    --primary-foreground: 0 0% 100%; /* White for contrast on green */
+    /* Enhanced vibrant gradients for light mode */
+    --primary: 158 85% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 135 29% 51%; /* Soft Muted Sage Green - remains good for light mode */
-    --secondary-foreground: 135 25% 15%; /* Dark, desaturated sage for contrast */
+    --secondary: 135 40% 55%;
+    --secondary-foreground: 135 25% 15%;
 
-    --accent: 158 70% 50%; /* Brighter Emerald for accents in light mode - good vibrancy */
-    --accent-foreground: 0 0% 100%; /* White */
+    --accent: 158 90% 55%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%; /* Modern Red */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 158 75% 45%; /* Adjusted Emerald Green for ring in light mode */
+    --ring: 158 85% 50%;
 
     --radius: 0.75rem;
 
-    /* Sidebar specific colors */
+    /* Enhanced gradient colors */
+    --gradient-start: 158 85% 45%;
+    --gradient-middle: 180 70% 55%;
+    --gradient-end: 200 80% 60%;
+    
+    /* New accent colors for gradients */
+    --purple-accent: 260 85% 65%;
+    --blue-accent: 200 85% 65%;
+    --teal-accent: 180 85% 55%;
+
+    /* Sidebar colors */
     --sidebar-background: 0 0% 96%;
     --sidebar-foreground: 240 10% 3.9%;
-    --sidebar-primary: 158 75% 42%; /* Adjusted for light mode */
+    --sidebar-primary: 158 85% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 210 20% 90%;
-    --sidebar-accent-foreground: 158 75% 38%; /* Darker Green for hover text on light bg */
+    --sidebar-accent-foreground: 158 85% 40%;
     --sidebar-border: 210 15% 85%;
-    --sidebar-ring: 158 75% 45%; /* Adjusted for light mode */
+    --sidebar-ring: 158 85% 50%;
 
-    --chart-1: 158 75% 42%; /* Primary Emerald (Light Adjusted) */
-    --chart-2: 135 29% 51%; /* Secondary Sage Green (Light) */
-    --chart-3: 190 30% 50%; /* Muted Teal/Blue for contrast (Light) */
-    --chart-4: 158 40% 28%; /* Darker Emerald/Teal (Light) */
-    --chart-5: 210 5% 50%; /* Neutral Gray (Light) */
+    /* Enhanced chart colors with gradients */
+    --chart-1: 158 85% 45%;
+    --chart-2: 135 40% 55%;
+    --chart-3: 200 70% 55%;
+    --chart-4: 260 60% 55%;
+    --chart-5: 180 65% 50%;
   }
 
   .dark {
-    /* Dark Mode - Black Aesthetic & Emerald Green with Sage Secondary */
-    --background: 220 15% 5%; /* Very Dark, Almost Black with a hint of blue */
-    --foreground: 0 0% 92%; /* Slightly Off-White for softer contrast */
+    /* Enhanced Dark Mode - More depth and visual interest */
+    --background: 220 20% 3%;
+    --foreground: 0 0% 95%;
 
-    --muted: 220 15% 15%; /* Dark Gray */
-    --muted-foreground: 0 0% 60%; /* Medium Light Gray */
+    --muted: 220 20% 12%;
+    --muted-foreground: 0 0% 65%;
 
-    --popover: 220 15% 8%; /* Darker Popovers */
-    --popover-foreground: 0 0% 92%; /* Slightly Off-White */
+    --popover: 220 20% 6%;
+    --popover-foreground: 0 0% 95%;
 
-    --card: 220 15% 10%; /* Dark Card, distinct from background */
-    --card-foreground: 0 0% 92%; /* Slightly Off-White */
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 95%;
 
-    --border: 220 15% 18%; /* Subtle Border */
-    --input: 220 15% 15%; /* Dark Input Background */
+    --border: 220 20% 15%;
+    --input: 220 20% 12%;
 
-    --primary: 158 70% 45%; /* Vibrant Emerald Green (Dark Mode Primary) */
-    --primary-foreground: 0 0% 100%; /* White */
+    /* Enhanced vibrant colors for dark mode */
+    --primary: 158 90% 55%;
+    --primary-foreground: 220 20% 3%;
 
-    --secondary: 135 29% 51%; /* Soft Muted Sage Green (Consistent for both modes) */
-    --secondary-foreground: 135 25% 88%; /* Light, desaturated sage for contrast on dark */
+    --secondary: 135 50% 60%;
+    --secondary-foreground: 135 25% 90%;
 
-    --accent: 158 80% 55%; /* Brighter Emerald for accent (Dark Mode Accent) */
-    --accent-foreground: 240 10% 3.9%; /* Near Black for contrast on bright green */
+    --accent: 158 95% 65%;
+    --accent-foreground: 220 20% 3%;
 
-    --destructive: 0 75% 60%; /* Brighter Red for dark mode */
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 0 0% 100%;
 
-    --ring: 158 70% 50%; /* Emerald for ring (Dark Mode) */
+    --ring: 158 90% 60%;
 
-    /* Sidebar specific colors for dark mode */
-    --sidebar-background: 220 15% 4%; /* Even darker sidebar */
-    --sidebar-foreground: 0 0% 92%;
-    --sidebar-primary: 158 70% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 12%;
-    --sidebar-accent-foreground: 158 70% 55%; /* Brighter Green for hover text */
-    --sidebar-border: 220 15% 10%;
-    --sidebar-ring: 158 70% 50%;
+    /* Enhanced gradient colors for dark mode */
+    --gradient-start: 158 90% 55%;
+    --gradient-middle: 180 80% 65%;
+    --gradient-end: 200 85% 70%;
+    
+    /* Enhanced accent colors for dark gradients */
+    --purple-accent: 260 90% 75%;
+    --blue-accent: 200 90% 75%;
+    --teal-accent: 180 90% 65%;
 
-    --chart-1: 158 70% 45%; /* Primary Emerald (Dark) */
-    --chart-2: 135 29% 51%; /* Secondary Sage Green (Dark) - Consistent */
-    --chart-3: 190 40% 55%; /* Muted Teal/Blue (Dark) */
-    --chart-4: 158 50% 30%; /* Darker Emerald/Teal (Dark) */
-    --chart-5: 210 5% 55%; /* Neutral Gray (Dark) */
+    /* Dark sidebar colors */
+    --sidebar-background: 220 20% 2%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 158 90% 55%;
+    --sidebar-primary-foreground: 220 20% 3%;
+    --sidebar-accent: 220 20% 10%;
+    --sidebar-accent-foreground: 158 90% 65%;
+    --sidebar-border: 220 20% 8%;
+    --sidebar-ring: 158 90% 60%;
+
+    /* Enhanced chart colors for dark mode */
+    --chart-1: 158 90% 55%;
+    --chart-2: 135 50% 60%;
+    --chart-3: 200 80% 65%;
+    --chart-4: 260 70% 65%;
+    --chart-5: 180 75% 60%;
   }
 }
 
@@ -116,42 +139,234 @@
   /* Larger headings - text-2xl can be applied directly in components */
 }
 
-/* Custom scrollbar styling */
+/* Enhanced scrollbar styling with gradients */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-muted/50;
-  border-radius: 10px;
+  @apply bg-muted/30;
+  border-radius: 12px;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary/70;
-  border-radius: 10px;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary;
+  background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
+  background-clip: content-box;
 }
 
-/* Glassmorphism base for components that need it */
+/* Enhanced glassmorphism effects */
 .glassmorphic {
-  @apply bg-card/60 dark:bg-card/50 backdrop-blur-lg border border-white/10 dark:border-white/5;
+  @apply bg-card/40 dark:bg-card/30;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* Soft UI / Neumorphic inspired shadows for cards (applied via card component) */
+.glassmorphic-strong {
+  @apply bg-card/60 dark:bg-card/40;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced gradient backgrounds */
+.gradient-bg-primary {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--teal-accent)) 50%, 
+    hsl(var(--blue-accent)) 100%);
+}
+
+.gradient-bg-secondary {
+  background: linear-gradient(135deg, 
+    hsl(var(--secondary)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--accent)) 100%);
+}
+
+.gradient-bg-purple {
+  background: linear-gradient(135deg, 
+    hsl(var(--purple-accent)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--teal-accent)) 100%);
+}
+
+.gradient-radial {
+  background: radial-gradient(ellipse at center, 
+    hsl(var(--primary) / 0.3) 0%, 
+    hsl(var(--teal-accent) / 0.2) 45%, 
+    hsl(var(--background)) 100%);
+}
+
+.gradient-radial-hero {
+  background: radial-gradient(ellipse at top, 
+    hsl(var(--primary) / 0.4) 0%, 
+    hsl(var(--blue-accent) / 0.3) 30%, 
+    hsl(var(--purple-accent) / 0.2) 60%, 
+    hsl(var(--background)) 100%);
+}
+
+/* Enhanced text gradients */
+.text-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--accent)) 50%, 
+    hsl(var(--blue-accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, 
+    hsl(var(--purple-accent)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--teal-accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced card effects */
+.card-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--card) / 0.8) 0%, 
+    hsl(var(--card) / 0.6) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.card-hover-glow:hover {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 30px hsl(var(--primary) / 0.3);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Enhanced button gradients */
+.btn-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--accent)) 100%);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    hsl(var(--accent)) 0%, 
+    hsl(var(--purple-accent)) 100%);
+  transition: left 0.3s ease;
+}
+
+.btn-gradient:hover::before {
+  left: 0;
+}
+
+.btn-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    hsl(var(--primary) / 0.1) 50%, 
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient {
+  background: linear-gradient(45deg, 
+    hsl(var(--primary)), 
+    hsl(var(--accent)), 
+    hsl(var(--blue-accent)), 
+    hsl(var(--purple-accent)));
+  background-size: 400% 400%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Enhanced soft UI shadows */
 .soft-ui-shadow-light {
-  box-shadow: 6px 6px 12px hsl(var(--background) / 0.6),
-    -6px -6px 12px hsl(0 0% 100% / 0.8);
-}
-.soft-ui-shadow-dark {
-  box-shadow: 6px 6px 12px hsl(var(--background) / 0.7),
-    -6px -6px 12px hsl(var(--foreground) / 0.05);
+  box-shadow: 
+    8px 8px 16px hsl(var(--background) / 0.8),
+    -8px -8px 16px hsl(0 0% 100% / 0.9),
+    inset 0 0 0 1px hsl(var(--primary) / 0.1);
 }
 
-/* Ensure card itself has a background that allows shadows to appear */
-html.dark .soft-ui-card {
-  /* background-color: hsl(var(--card)); */ /* Use card color from vars */
+.soft-ui-shadow-dark {
+  box-shadow: 
+    8px 8px 16px hsl(var(--background) / 0.9),
+    -8px -8px 16px hsl(var(--foreground) / 0.08),
+    inset 0 0 0 1px hsl(var(--primary) / 0.2);
 }
-html:not(.dark) .soft-ui-card {
-  /* background-color: hsl(var(--card)); */ /* Use card color from vars */
+
+/* New utility classes */
+.border-gradient {
+  border: 2px solid transparent;
+  background: linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+              linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))) border-box;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+.shadow-glow-strong {
+  box-shadow: 0 0 50px hsl(var(--primary) / 0.5);
 }

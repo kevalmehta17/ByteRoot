@@ -1,0 +1,370 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Enhanced Light Mode - More vibrant and gradient-friendly */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --muted: 210 20% 94%;
+    --muted-foreground: 240 5% 35%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --border: 210 15% 88%;
+    --input: 210 15% 94%;
+
+    /* Enhanced vibrant gradients for light mode */
+    --primary: 158 85% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 135 40% 55%;
+    --secondary-foreground: 135 25% 15%;
+
+    --accent: 158 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --ring: 158 85% 50%;
+
+    --radius: 0.75rem;
+
+    /* Enhanced gradient colors */
+    --gradient-start: 158 85% 45%;
+    --gradient-middle: 180 70% 55%;
+    --gradient-end: 200 80% 60%;
+    
+    /* New accent colors for gradients */
+    --purple-accent: 260 85% 65%;
+    --blue-accent: 200 85% 65%;
+    --teal-accent: 180 85% 55%;
+
+    /* Sidebar colors */
+    --sidebar-background: 0 0% 96%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-primary: 158 85% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 90%;
+    --sidebar-accent-foreground: 158 85% 40%;
+    --sidebar-border: 210 15% 85%;
+    --sidebar-ring: 158 85% 50%;
+
+    /* Enhanced chart colors with gradients */
+    --chart-1: 158 85% 45%;
+    --chart-2: 135 40% 55%;
+    --chart-3: 200 70% 55%;
+    --chart-4: 260 60% 55%;
+    --chart-5: 180 65% 50%;
+  }
+
+  .dark {
+    /* Enhanced Dark Mode - More depth and visual interest */
+    --background: 220 20% 3%;
+    --foreground: 0 0% 95%;
+
+    --muted: 220 20% 12%;
+    --muted-foreground: 0 0% 65%;
+
+    --popover: 220 20% 6%;
+    --popover-foreground: 0 0% 95%;
+
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 12%;
+
+    /* Enhanced vibrant colors for dark mode */
+    --primary: 158 90% 55%;
+    --primary-foreground: 220 20% 3%;
+
+    --secondary: 135 50% 60%;
+    --secondary-foreground: 135 25% 90%;
+
+    --accent: 158 95% 65%;
+    --accent-foreground: 220 20% 3%;
+
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 0 0% 100%;
+
+    --ring: 158 90% 60%;
+
+    /* Enhanced gradient colors for dark mode */
+    --gradient-start: 158 90% 55%;
+    --gradient-middle: 180 80% 65%;
+    --gradient-end: 200 85% 70%;
+    
+    /* Enhanced accent colors for dark gradients */
+    --purple-accent: 260 90% 75%;
+    --blue-accent: 200 90% 75%;
+    --teal-accent: 180 90% 65%;
+
+    /* Dark sidebar colors */
+    --sidebar-background: 220 20% 2%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 158 90% 55%;
+    --sidebar-primary-foreground: 220 20% 3%;
+    --sidebar-accent: 220 20% 10%;
+    --sidebar-accent-foreground: 158 90% 65%;
+    --sidebar-border: 220 20% 8%;
+    --sidebar-ring: 158 90% 60%;
+
+    /* Enhanced chart colors for dark mode */
+    --chart-1: 158 90% 55%;
+    --chart-2: 135 50% 60%;
+    --chart-3: 200 80% 65%;
+    --chart-4: 260 70% 65%;
+    --chart-5: 180 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Enhanced scrollbar styling with gradients */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-muted/30;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  border-radius: 12px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, hsl(var(--accent)) 0%, hsl(var(--primary)) 100%);
+  background-clip: content-box;
+}
+
+/* Enhanced glassmorphism effects */
+.glassmorphic {
+  @apply bg-card/40 dark:bg-card/30;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glassmorphic-strong {
+  @apply bg-card/60 dark:bg-card/40;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Enhanced gradient backgrounds */
+.gradient-bg-primary {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--teal-accent)) 50%, 
+    hsl(var(--blue-accent)) 100%);
+}
+
+.gradient-bg-secondary {
+  background: linear-gradient(135deg, 
+    hsl(var(--secondary)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--accent)) 100%);
+}
+
+.gradient-bg-purple {
+  background: linear-gradient(135deg, 
+    hsl(var(--purple-accent)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--teal-accent)) 100%);
+}
+
+.gradient-radial {
+  background: radial-gradient(ellipse at center, 
+    hsl(var(--primary) / 0.3) 0%, 
+    hsl(var(--teal-accent) / 0.2) 45%, 
+    hsl(var(--background)) 100%);
+}
+
+.gradient-radial-hero {
+  background: radial-gradient(ellipse at top, 
+    hsl(var(--primary) / 0.4) 0%, 
+    hsl(var(--blue-accent) / 0.3) 30%, 
+    hsl(var(--purple-accent) / 0.2) 60%, 
+    hsl(var(--background)) 100%);
+}
+
+/* Enhanced text gradients */
+.text-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--accent)) 50%, 
+    hsl(var(--blue-accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, 
+    hsl(var(--purple-accent)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--teal-accent)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Enhanced card effects */
+.card-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--card) / 0.8) 0%, 
+    hsl(var(--card) / 0.6) 100%);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.card-hover-glow:hover {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 0 30px hsl(var(--primary) / 0.3);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Enhanced button gradients */
+.btn-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--primary)) 0%, 
+    hsl(var(--accent)) 100%);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, 
+    hsl(var(--accent)) 0%, 
+    hsl(var(--purple-accent)) 100%);
+  transition: left 0.3s ease;
+}
+
+.btn-gradient:hover::before {
+  left: 0;
+}
+
+.btn-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    hsl(var(--primary) / 0.1) 50%, 
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient {
+  background: linear-gradient(45deg, 
+    hsl(var(--primary)), 
+    hsl(var(--accent)), 
+    hsl(var(--blue-accent)), 
+    hsl(var(--purple-accent)));
+  background-size: 400% 400%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Enhanced soft UI shadows */
+.soft-ui-shadow-light {
+  box-shadow: 
+    8px 8px 16px hsl(var(--background) / 0.8),
+    -8px -8px 16px hsl(0 0% 100% / 0.9),
+    inset 0 0 0 1px hsl(var(--primary) / 0.1);
+}
+
+.soft-ui-shadow-dark {
+  box-shadow: 
+    8px 8px 16px hsl(var(--background) / 0.9),
+    -8px -8px 16px hsl(var(--foreground) / 0.08),
+    inset 0 0 0 1px hsl(var(--primary) / 0.2);
+}
+
+/* New utility classes */
+.border-gradient {
+  border: 2px solid transparent;
+  background: linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box,
+              linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))) border-box;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 30px hsl(var(--primary) / 0.3);
+}
+
+.shadow-glow-strong {
+  box-shadow: 0 0 50px hsl(var(--primary) / 0.5);
+}

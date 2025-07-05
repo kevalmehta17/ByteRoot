@@ -2,13 +2,9 @@
 
 ByteRoot is a comprehensive AI-powered health companion application designed to help users manage their health through intelligent symptom analysis, medical document processing, hospital booking, and emergency assistance. Built with modern web technologies and powered by Google AI, ByteRoot offers an intuitive, AI-driven experience for managing health-related tasks.
 
-<div align="center">
-  <img src="/favicon-96x96.png" alt="ByteRoot Logo" width="80" height="80">
-  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-14-black">
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-blue">
-  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind-3.4-06B6D4">
-  <img alt="Google AI" src="https://img.shields.io/badge/Google AI-Genkit-4285F4">
-</div>
+## 🌐 Live Demo
+
+You can check out the live demo of the project here: 💖 [ByteRoot - Live Demo](https://your-live-demo-link.com)
 
 ## 🌟 Overview
 
@@ -20,6 +16,7 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 
 ### 🤖 AI-Powered Health Tools
 
+- **AI Chatbot**⚡: Get AI advice with our latest gemini integrated features.
 - **Symptom Checker** 🔥: Get preliminary health advice based on your symptoms.
 - **Medical Image Analysis** 💯: AI-powered diagnosis of medical images.
 - **Drug Interaction Checker** ✅: Check potential medication interactions.
@@ -72,6 +69,7 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 ### AI Integration
 
 - **Framework**: Google AI Genkit 🤖
+- **SDK**: Google AI SDK 💡
 - **Custom Flows**: Custom AI flows for health-related tasks 🌟
 
 ### Additional Libraries
@@ -81,3 +79,11 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 - **Type Safety** 🛡️: Full TypeScript implementation
 
 ---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js**: Version 18+
+- **Package Manager**: npm or yarn
+- **Google AI API Key**: Obtain an API key from Google AI for integration.

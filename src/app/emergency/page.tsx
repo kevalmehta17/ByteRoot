@@ -238,7 +238,7 @@ export default function EmergencyPage() {
             <Icons.emergency className="h-10 w-10 text-destructive animate-pulse" />
           </div>
           <CardTitle className="font-headline text-3xl text-destructive drop-shadow-sm">
-            Emergency SOS
+            Emergency Form
           </CardTitle>
           <CardDescription className="text-lg text-muted-foreground">
             Fill this form urgently.

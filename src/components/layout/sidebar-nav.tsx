@@ -99,7 +99,7 @@ export function SidebarNav() {
           item.isEmergency
             ? "bg-destructive/10 text-destructive hover:bg-destructive/20 dark:hover:bg-destructive/30 hover:shadow-md"
             : isActive
-            ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+            ? "bg-gradient-to-r from-primary to-accent text-primary-foreground font-semibold hover:opacity-90 shadow-lg"
             : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-sm",
           item.disabled && "cursor-not-allowed opacity-50"
         );

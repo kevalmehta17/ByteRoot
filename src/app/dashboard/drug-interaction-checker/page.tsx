@@ -80,6 +80,11 @@ export default function DrugInteractionChecker() {
 
   return (
     <div className="space-y-8">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute -top-[30%] -right-[10%] w-[50%] h-[70%] bg-primary/20 blur-[120px] rounded-full" />
+        <div className="absolute top-[20%] -left-[10%] w-[40%] h-[60%] bg-accent/20 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[10%] right-[20%] w-[30%] h-[40%] bg-secondary/20 blur-[120px] rounded-full" />
+      </div>
       <h1 className="font-headline text-3xl font-semibold text-foreground drop-shadow-sm">
         AI Drug Interaction Checker (Beta)
       </h1>

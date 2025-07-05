@@ -4,6 +4,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,21 +22,25 @@ const quickActions = [
     label: "Book Appointment",
     href: "/dashboard/hospitals",
     icon: Icons.appointments,
+    description: "Find a hospital and schedule your next visit.",
   },
   {
     label: "Drug Interactions",
     href: "/dashboard/drug-interaction-checker",
     icon: Icons.tablet,
+    description: "Check for potential drug interactions.",
   },
   {
     label: "Check Symptoms",
     href: "/dashboard/symptom-checker",
     icon: Icons.symptomChecker,
+    description: "Get AI-powered advice on your symptoms.",
   },
   {
     label: "Simplify Report",
     href: "/dashboard/report-simplifier",
     icon: Icons.reportSimplifier,
+    description: "Translate complex medical reports.",
   },
 ];
 
@@ -95,19 +100,32 @@ export default function DashboardPage() {
           return (
             <Card
               key={action.label}
-              className="hover:shadow-xl transition-shadow duration-300 rounded-2xl animate-subtle-slide-up"
+              className="hover:shadow-xl transition-shadow duration-300 rounded-2xl animate-subtle-slide-up flex flex-col bg-card/80 backdrop-blur-sm"
             >
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-base font-medium">
+              <CardHeader className="pb-4">
+                <div className="p-3 rounded-full bg-primary/10 w-fit">
+                  <IconComponent className="h-7 w-7 text-primary" />
+                </div>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <CardTitle className="text-lg font-semibold">
                   {action.label}
                 </CardTitle>
-                <IconComponent className="h-5 w-5 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <Button size="sm" asChild className="w-full mt-2">
-                  <Link href={action.href}>Go</Link>
-                </Button>
+                <CardDescription className="mt-1 text-sm h-10">
+                  {action.description}
+                </CardDescription>
               </CardContent>
+              <CardFooter>
+                <Button
+                  asChild
+                  className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground text-black font-semibold hover:opacity-90"
+                >
+                  <Link href={action.href}>
+                    Access
+                    <Icons.chevronRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
             </Card>
           );
         })}
@@ -240,6 +258,7 @@ export default function DashboardPage() {
                 width={300}
                 height={200}
                 className="rounded-lg mx-auto shadow-md"
+                data-ai-hint="doctor nurse"
               />
               <p className="text-xs text-muted-foreground mt-2"></p>
             </div>

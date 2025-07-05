@@ -16,7 +16,7 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 
 ### 🤖 AI-Powered Health Tools
 
-- **AI Chatbot**⚡: Get AI advice with our latest gemini integrated features.
+- **AI Chatbot**⚡: Get AI advice with our latest Gemini integrated features.
 - **Symptom Checker** 🔥: Get preliminary health advice based on your symptoms.
 - **Medical Image Analysis** 💯: AI-powered diagnosis of medical images.
 - **Drug Interaction Checker** ✅: Check potential medication interactions.
@@ -38,13 +38,13 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 
 ### 🚨 Emergency Services
 
-- **Emergency SOS** 🚑: Quick access to emergency assistance with one click.
+- **Emergency Form** 🚑: Quick access to emergency assistance with one click.
 - **Location-based Recommendations** 📍: Find the nearest hospitals during emergencies.
 - **AI Emergency Assessment** 🚨: Get immediate guidance for emergency situations.
 
 ### 📋 Document Management
 
-- **Medical Report Upload** 🖼️: Support for PDF and image file uploads.
+- **Medical Report Upload** 🖼️: Support for PDF and image file uploads to simplify.
 - **Document Analysis** 🤓: AI-powered analysis of medical documents.
 - **Report Translation** 🌐: Translate medical reports into preferred languages.
 
@@ -57,11 +57,10 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 - **Framework**: Next.js 14 (App Router) 👩‍💻
 - **Language**: TypeScript 🔠
 - **Styling**: Tailwind CSS 🎨
-- **UI Components**: Radix UI 🎛️
+- **UI Components**: Radix UI 🎛️, **ShadCN UI** 🧩
 - **Animations**: Framer Motion 🎢
 - **Icons**: Lucide React 🔲
 - **Charts**: Recharts 📊
-- **Form Management**: React Hook Form 📝
 - **Schema Validation**: Zod 📏
 - **Date Handling**: date-fns 📅
 - **Class Management**: class-variance-authority, clsx, tailwind-merge 🎚️
@@ -69,7 +68,6 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 ### AI Integration
 
 - **Framework**: Google AI Genkit 🤖
-- **SDK**: Google AI SDK 💡
 - **Custom Flows**: Custom AI flows for health-related tasks 🌟
 
 ### Additional Libraries
@@ -84,6 +82,5 @@ ByteRoot combines cutting-edge AI technology and robust web frameworks to provid
 
 ### Prerequisites
 
-- **Node.js**: Version 18+
 - **Package Manager**: npm or yarn
 - **Google AI API Key**: Obtain an API key from Google AI for integration.

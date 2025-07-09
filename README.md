@@ -4,7 +4,7 @@ ByteRoot is a comprehensive AI-powered health companion application designed to 
 
 ## 🌐 Live Demo
 
-You can check out the live demo of the project here: 💖 [ByteRoot - Live Demo](https://your-live-demo-link.com)
+You can check out the live demo of the project here: 💖 [ByteRoot - Live Demo](https://byte-root-team.vercel.app/)
 
 ## 🌟 Overview
 
